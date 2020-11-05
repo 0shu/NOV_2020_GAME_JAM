@@ -1,0 +1,1 @@
+Filler doc to make empty folders work in git
