@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DomHScripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\PlayerRespawn.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Interactables\Interactable.cs" />
