@@ -18,12 +18,12 @@ public class Switch : MonoBehaviour
         
     }
 
-    void OnCollisionEnter3D(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         down = true;
     }
 
-    void OnCollisionExit3D(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
         down = false;
     }

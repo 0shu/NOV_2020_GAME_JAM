@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    //Replace with base class for interactable objects
+    //Replace with base class for interactable objects, fine using polymorphism
     [SerializeField]
     private GameObject link;//!<Object linked to the door, which controls its state
     private Vector3 closePos;//!<Object's position when closed
