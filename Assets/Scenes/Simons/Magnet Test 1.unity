@@ -628,8 +628,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331536043}
   m_LocalRotation: {x: -0, y: 0.43340904, z: -0, w: 0.9011973}
-  m_LocalPosition: {x: -6.9049644, y: 5.4549503, z: -20.331038}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -8.5, y: 5.4549503, z: -18.3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1420946914}
   m_RootOrder: 2
@@ -832,7 +832,7 @@ Transform:
   m_GameObject: {fileID: 799077168}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.9049644, y: 3.9949503, z: -17.301037}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1420946914}
   m_RootOrder: 1
@@ -882,8 +882,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132492384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.9049644, y: 3.9949503, z: -17.301037}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5.1, y: 3.9949503, z: -17.301037}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1420946914}
   m_RootOrder: 3
@@ -1056,13 +1056,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198184329}
-  m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 10, y: 10, z: -10}
+  m_LocalRotation: {x: 0.17732227, y: -0.38215995, z: 0.07497681, w: 0.90381914}
+  m_LocalPosition: {x: 78.4, y: 50.9, z: -78.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 22.2, y: -45.84, z: 0}
 --- !u!1 &1420946913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,7 +1203,7 @@ Transform:
   m_GameObject: {fileID: 1434724536}
   m_LocalRotation: {x: -0, y: 0.43340904, z: -0, w: 0.9011973}
   m_LocalPosition: {x: -6.9049644, y: 5.4549503, z: -20.331038}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1420946914}
   m_RootOrder: 0
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 10
   equilibrium: 5
-  cutoff: 25
+  cutoff: 20
   magnets: []
 --- !u!4 &1891740166
 Transform:
