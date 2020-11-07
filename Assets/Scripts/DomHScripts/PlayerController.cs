@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
     private const float defaultWaddlingSpeed = 4f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
-    private const float drag = 0.001f;
+    private const float drag = 0.5f;
 
     public Transform cam;
+    public GameObject SlidingPlayerModel;
 
     private float horizontal;
     private float vertical;
@@ -57,40 +58,26 @@ public class PlayerController : MonoBehaviour
         if (direction.magnitude >= 0.1f) // Player Movement Input
         {
             targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            //angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref TurnSmoothVelocity, 0.01f);
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-
-            if (groundedPlayer)
+            if (Running)
             {
-                if (Running)
+                if (playerSpeed <= top_speed)
                 {
-                    if (playerSpeed <= top_speed)
-                    {
-                        playerSpeed += 0.70f * direction.magnitude; // ground acceleration to waddling speed
-                    }
-                }
-                else
-                {
-                    if (playerSpeed <= defaultWaddlingSpeed)
-                    {
-                        playerSpeed += 1.75f * direction.magnitude; // ground acceleration to waddling speed
-                    }
+                    playerSpeed += 0.25f * direction.magnitude; // ground acceleration to waddling speed
                 }
             }
-            else //mid air
+            else
             {
-                if (playerSpeed < top_speed)
+                if (playerSpeed <= defaultWaddlingSpeed)
                 {
-                    if (playerSpeed < defaultWaddlingSpeed)
-                    {
-                        playerSpeed += 1.0f * direction.magnitude;
-                    }
+                    playerSpeed += 0.5f * direction.magnitude; // ground acceleration to waddling speed
                 }
             }
 
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref TurnSmoothVelocity, playerSpeed * 0.01f);
+
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         if (playerSpeed <= 0)
         {
@@ -99,18 +86,20 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            playerSpeed -= drag;
+            playerSpeed -= drag * Time.deltaTime;
             if (groundedPlayer)
             {
                 
                 if (Sliding)
                 {
-                    playerSpeed -= 0.001f;
+                    playerSpeed -= 0.05f * Time.deltaTime;
                     Debug.Log("Sliding!");
+                    SlidingPlayerModel.SetActive(true);
                 }
                 else
                 {
-                    playerSpeed -= 0.5f;
+                    playerSpeed -= 5.0f * Time.deltaTime;
+                    SlidingPlayerModel.SetActive(false);
                 }
             }
         }
@@ -118,10 +107,6 @@ public class PlayerController : MonoBehaviour
         moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         controller.Move(moveDirection.normalized * Time.deltaTime * playerSpeed);
 
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
 
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && groundedPlayer)
