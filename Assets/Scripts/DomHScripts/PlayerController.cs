@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,35 +13,143 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
+    private float playerSpeed;
+    private const float top_speed = 10f;
+    private const float defaultWaddlingSpeed = 4f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
+    private const float drag = 0.5f;
+
+    public Transform cam;
+    public GameObject SlidingPlayerModel;
+    public GameObject player_2;
+    public Transform camLookAt;
+    public CinemachineFreeLook freelookcam;
+
+    private CinemachineFreeLook.Orbit[] originalOrbits;
+
+    private float horizontal;
+    private float vertical;
+    private Vector3 direction;
+    private Vector3 moveDirection;
+
+    private float targetAngle;
+    private float angle;
+
+    float TurnSmoothVelocity;
+
+    private Boolean Sliding;
+    private Boolean Running;
+    
 
     private void Start()
     {
         controller = gameObject.AddComponent<CharacterController>();
+
+        originalOrbits = new CinemachineFreeLook.Orbit[freelookcam.m_Orbits.Length];
+        for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
+        {
+            originalOrbits[i].m_Height = freelookcam.m_Orbits[i].m_Height;
+            originalOrbits[i].m_Radius = freelookcam.m_Orbits[i].m_Radius;
+        }
     }
 
     void Update()
     {
+
+        camLookAt.position = Vector3.Lerp(transform.position, player_2.transform.position, 0.5f);
+
+        for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
+        {
+            freelookcam.m_Orbits[i].m_Radius = Mathf.Lerp(freelookcam.m_Orbits[i].m_Radius, originalOrbits[i].m_Radius * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
+            freelookcam.m_Orbits[i].m_Height = Mathf.Lerp(freelookcam.m_Orbits[i].m_Height, originalOrbits[i].m_Height * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
+        }
+
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+        direction = new Vector3(horizontal, 0f, vertical).normalized;
+        
 
-        if (move != Vector3.zero)
+
+        if (direction.magnitude >= 0.1f) // Player Movement Input
         {
-            gameObject.transform.forward = move;
+            targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            if (Running)
+            {
+                if (playerSpeed <= top_speed)
+                {
+                    playerSpeed += 0.25f * direction.magnitude; // ground acceleration to waddling speed
+                }
+            }
+            else
+            {
+                if (playerSpeed <= defaultWaddlingSpeed)
+                {
+                    playerSpeed += 0.5f * direction.magnitude; // ground acceleration to waddling speed
+                }
+            }
+
         }
+
+        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref TurnSmoothVelocity, playerSpeed * 0.01f);
+
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        if (playerSpeed <= 0)
+        {
+            playerSpeed = 0f;
+            Sliding = false;
+        }
+        else
+        {
+            playerSpeed -= drag * Time.deltaTime;
+            if (groundedPlayer)
+            {
+                
+                if (Sliding)
+                {
+                    playerSpeed -= 0.05f * Time.deltaTime;
+                    Debug.Log("Sliding!");
+                    SlidingPlayerModel.SetActive(true);
+                }
+                else
+                {
+                    playerSpeed -= 5.0f * Time.deltaTime;
+                    SlidingPlayerModel.SetActive(false);
+                }
+            }
+        }
+
+        moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        controller.Move(moveDirection.normalized * Time.deltaTime * playerSpeed);
+
 
         // Changes the height position of the player..
         if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        if (Input.GetButton("Run") && groundedPlayer)
+        {
+            Running = true;
+            Sliding = false;
+        }
+        else
+        {
+            Running = false;
+        }
+
+        if (Input.GetButtonDown("Slide") && playerSpeed > 0)
+        {
+            Sliding = true;
+            
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -52,6 +163,8 @@ public class PlayerController : MonoBehaviour
             for (int i = 0; i < m_InteractablesList.Count; ++i)
                 m_InteractablesList[i].Interact();
         }
+
+
     }
 
     #endregion Unity's example
