@@ -9,7 +9,15 @@ public class PlayerController : MonoBehaviour
 {
     List<Interactable> m_InteractablesList = new List<Interactable>();
 
-    #region Unity's example
+    enum Player
+    {
+        One = 1,
+        Two = 2
+    }
+
+    [SerializeField]
+    private Player m_Player;
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -21,12 +29,14 @@ public class PlayerController : MonoBehaviour
     private const float drag = 0.5f;
 
     public Transform cam;
-    public GameObject SlidingPlayerModel;
+#if CINEMACHINE
     public GameObject player_2;
     public Transform camLookAt;
+
     public CinemachineFreeLook freelookcam;
 
     private CinemachineFreeLook.Orbit[] originalOrbits;
+#endif
 
     private float horizontal;
     private float vertical;
@@ -46,17 +56,20 @@ public class PlayerController : MonoBehaviour
     {
         controller = gameObject.AddComponent<CharacterController>();
 
+#if CINEMACHINE
         originalOrbits = new CinemachineFreeLook.Orbit[freelookcam.m_Orbits.Length];
         for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
         {
             originalOrbits[i].m_Height = freelookcam.m_Orbits[i].m_Height;
             originalOrbits[i].m_Radius = freelookcam.m_Orbits[i].m_Radius;
         }
+#endif
     }
 
     void Update()
     {
 
+#if CINEMACHINE
         camLookAt.position = Vector3.Lerp(transform.position, player_2.transform.position, 0.5f);
 
         for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
@@ -64,6 +77,7 @@ public class PlayerController : MonoBehaviour
             freelookcam.m_Orbits[i].m_Radius = Mathf.Lerp(freelookcam.m_Orbits[i].m_Radius, originalOrbits[i].m_Radius * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
             freelookcam.m_Orbits[i].m_Height = Mathf.Lerp(freelookcam.m_Orbits[i].m_Height, originalOrbits[i].m_Height * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
         }
+#endif
 
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
@@ -71,8 +85,16 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        if (m_Player == Player.One)
+        {
+            horizontal = Input.GetAxisRaw("HorizontalPlayer1");
+            vertical = Input.GetAxisRaw("VerticalPlayer1");
+        }
+        else if (m_Player == Player.Two)
+        {
+            horizontal = Input.GetAxisRaw("HorizontalPlayer2");
+            vertical = Input.GetAxisRaw("VerticalPlayer2");
+        }
         direction = new Vector3(horizontal, 0f, vertical).normalized;
         
 
@@ -116,12 +138,10 @@ public class PlayerController : MonoBehaviour
                 {
                     playerSpeed -= 0.05f * Time.deltaTime;
                     Debug.Log("Sliding!");
-                    SlidingPlayerModel.SetActive(true);
                 }
                 else
                 {
                     playerSpeed -= 5.0f * Time.deltaTime;
-                    SlidingPlayerModel.SetActive(false);
                 }
             }
         }
@@ -131,43 +151,79 @@ public class PlayerController : MonoBehaviour
 
 
         // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        if (m_Player == Player.One)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
+            if (Input.GetButtonDown("JumpPlayer1") && groundedPlayer)
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            }
 
-        if (Input.GetButton("Run") && groundedPlayer)
-        {
-            Running = true;
-            Sliding = false;
-        }
-        else
-        {
-            Running = false;
-        }
 
-        if (Input.GetButtonDown("Slide") && playerSpeed > 0)
+            if (Input.GetButton("RunPlayer1") && groundedPlayer)
+            {
+                Running = true;
+                Sliding = false;
+            }
+            else
+            {
+                Running = false;
+            }
+
+            if (Input.GetButtonDown("SlidePlayer1") && playerSpeed > 0)
+            {
+                Sliding = true;
+
+            }
+        }
+        else if (m_Player == Player.Two)
         {
-            Sliding = true;
-            
+            if (Input.GetButtonDown("JumpPlayer2") && groundedPlayer)
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            }
+
+
+            if (Input.GetButton("RunPlayer2") && groundedPlayer)
+            {
+                Running = true;
+                Sliding = false;
+            }
+            else
+            {
+                Running = false;
+            }
+
+            if (Input.GetButtonDown("SlidePlayer2") && playerSpeed > 0)
+            {
+                Sliding = true;
+
+            }
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
 
-
-        ////NOT UNITY'S EXAMPLE
-        if (Input.GetKeyDown(KeyCode.E))
+        if (m_Player == Player.One)
         {
-            for (int i = 0; i < m_InteractablesList.Count; ++i)
-                m_InteractablesList[i].Interact();
+            if (Input.GetButtonDown("InteractPlayer1"))
+            {
+                for (int i = 0; i < m_InteractablesList.Count; ++i)
+                    m_InteractablesList[i].Interact();
+            }
+        }
+        else if (m_Player == Player.Two)
+        {
+            if (Input.GetButtonDown("InteractPlayer2"))
+            {
+                for (int i = 0; i < m_InteractablesList.Count; ++i)
+                    m_InteractablesList[i].Interact();
+            }
         }
 
 
     }
 
-    #endregion Unity's example
 
     private void OnTriggerEnter(Collider other)
     {
