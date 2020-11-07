@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,9 +12,28 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
+    private float playerSpeed;
+    private const float top_speed = 15f;
+    private const float defaultWaddlingSpeed = 4f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
+    private const float drag = 0.05f;
+
+    public Transform cam;
+
+    private float horizontal;
+    private float vertical;
+    private Vector3 direction;
+    private Vector3 moveDirection;
+
+    private float targetAngle;
+    private float angle;
+
+    float TurnSmoothVelocity;
+
+    private Boolean Sliding;
+    private Boolean Running;
+    
 
     private void Start()
     {
@@ -27,8 +48,74 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+        direction = new Vector3(horizontal, 0f, vertical).normalized;
+        
+
+
+        if (direction.magnitude >= 0.1f) // Player Movement Input
+        {
+            targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            //angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref TurnSmoothVelocity, 0.01f);
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+
+            if (groundedPlayer)
+            {
+                if (Running)
+                {
+                    if (playerSpeed <= top_speed)
+                    {
+                        playerSpeed += 0.70f * direction.magnitude; // ground acceleration to waddling speed
+                    }
+                }
+                else
+                {
+                    if (playerSpeed <= defaultWaddlingSpeed)
+                    {
+                        playerSpeed += 1.75f * direction.magnitude; // ground acceleration to waddling speed
+                    }
+                }
+            }
+            else //mid air
+            {
+                if (playerSpeed < top_speed)
+                {
+                    if (playerSpeed < defaultWaddlingSpeed)
+                    {
+                        playerSpeed += 1.0f * direction.magnitude;
+                    }
+                }
+            }
+
+        }
+
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        if (playerSpeed <= 0)
+        {
+            playerSpeed = 0f;
+            Sliding = false;
+        }
+        else
+        {
+            playerSpeed -= drag;
+            if (groundedPlayer)
+            {
+                
+                if (Sliding)
+                {
+                    playerSpeed -= 0.025f;
+                }
+                else
+                {
+                    playerSpeed -= 0.5f;
+                }
+            }
+        }
+
+        moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        controller.Move(moveDirection.normalized * Time.deltaTime * playerSpeed);
 
         if (move != Vector3.zero)
         {
@@ -39,6 +126,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        if (Input.GetButton("Run") && groundedPlayer)
+        {
+            Running = true;
+            Sliding = false;
+        }
+        else
+        {
+            Running = false;
+        }
+
+        if (Input.GetButtonDown("Slide") && groundedPlayer && playerSpeed > 0)
+        {
+            Sliding = true;
+            
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
