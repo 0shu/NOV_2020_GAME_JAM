@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private const float defaultWaddlingSpeed = 4f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
-    private const float drag = 0.05f;
+    private const float drag = 0.001f;
 
     public Transform cam;
 
@@ -105,7 +105,8 @@ public class PlayerController : MonoBehaviour
                 
                 if (Sliding)
                 {
-                    playerSpeed -= 0.025f;
+                    playerSpeed -= 0.001f;
+                    Debug.Log("Sliding!");
                 }
                 else
                 {
@@ -138,7 +139,7 @@ public class PlayerController : MonoBehaviour
             Running = false;
         }
 
-        if (Input.GetButtonDown("Slide") && groundedPlayer && playerSpeed > 0)
+        if (Input.GetButtonDown("Slide") && playerSpeed > 0)
         {
             Sliding = true;
             
