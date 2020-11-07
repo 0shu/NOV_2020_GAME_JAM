@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 10
   equilibrium: 5
-  cutoff: 50
+  cutoff: 25
   magnets: []
 --- !u!4 &1891740166
 Transform:

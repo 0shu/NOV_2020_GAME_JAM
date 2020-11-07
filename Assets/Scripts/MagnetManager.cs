@@ -44,6 +44,7 @@ public class MagnetManager : MonoBehaviour
                 float magnitude = separation.magnitude;
                 if (magnitude >= cutoff) continue;
 
+                magnitude += 0.5f;
                 separation.Normalize();
                 float force = (info1.power * info2.power * strength) / magnitude;
 
