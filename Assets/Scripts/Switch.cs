@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-    private bool down { get; set; }//!<Is the switch down?
+    private bool down { get { return down; } set { down = value; } }//!<Is the switch down?
 
     // Start is called before the first frame update
     void Start()
