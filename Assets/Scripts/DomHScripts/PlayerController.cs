@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
             freelookcam.m_Orbits[i].m_Height = Mathf.Lerp(freelookcam.m_Orbits[i].m_Height, originalOrbits[i].m_Height * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
         }
 
+        freelookcam.m_Lens.FieldOfView =Mathf.Clamp(95f - (Vector3.Distance(transform.position, camLookAt.position) * 0.75f), 60f,95f) ;
+
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
