@@ -12,7 +12,9 @@ public class Magnetic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager.AddMagnet(this);
+        if (manager) manager.AddMagnet(this);
+        else Debug.LogWarning("Magnet does not have manager!");
+
         rb = gameObject.GetComponent<Rigidbody>();
     }
 

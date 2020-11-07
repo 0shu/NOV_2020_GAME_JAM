@@ -63,9 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DomHScripts\Interactable.cs" />
-    <Compile Include="Assets\Scripts\DomHScripts\InteractableExample.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Interactables\Interactable.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Interactables\InteractableExample.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switch.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switchable.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\SwitchableExample.cs" />
     <Compile Include="Assets\Scripts\Simons\MagnetManager.cs" />
     <Compile Include="Assets\Scripts\Simons\Magnetic.cs" />
     <None Include="Assets\3D Models\Characters\Readme.txt" />
