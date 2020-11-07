@@ -63,8 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\MagnetManager.cs" />
-    <Compile Include="Assets\Scripts\Magnetic.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\InteractableExample.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Simons\MagnetManager.cs" />
+    <Compile Include="Assets\Scripts\Simons\Magnetic.cs" />
     <None Include="Assets\3D Models\Characters\Readme.txt" />
     <None Include="Assets\Scripts\Readme.txt" />
     <None Include="Assets\Audio\Music\Readme.txt" />
@@ -74,6 +77,7 @@
     <None Include="Assets\3D Models\Environments\Readme.txt" />
     <None Include="Assets\2D Art\Readme.txt" />
     <None Include="Assets\2D Art\UI\Readme.txt" />
+    <None Include="Assets\Scripts\DomHScripts\Readme.txt" />
     <None Include="Assets\Prefabs\Readme.txt" />
     <None Include="Assets\Audio\Readme.txt" />
     <None Include="Assets\Audio\Sound Effects\Readme.txt" />
