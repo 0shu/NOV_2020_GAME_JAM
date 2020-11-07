@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private float playerSpeed;
-    private const float top_speed = 15f;
+    private const float top_speed = 10f;
     private const float defaultWaddlingSpeed = 4f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
@@ -21,6 +22,11 @@ public class PlayerController : MonoBehaviour
 
     public Transform cam;
     public GameObject SlidingPlayerModel;
+    public GameObject player_2;
+    public Transform camLookAt;
+    public CinemachineFreeLook freelookcam;
+
+    private CinemachineFreeLook.Orbit[] originalOrbits;
 
     private float horizontal;
     private float vertical;
@@ -39,10 +45,26 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = gameObject.AddComponent<CharacterController>();
+
+        originalOrbits = new CinemachineFreeLook.Orbit[freelookcam.m_Orbits.Length];
+        for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
+        {
+            originalOrbits[i].m_Height = freelookcam.m_Orbits[i].m_Height;
+            originalOrbits[i].m_Radius = freelookcam.m_Orbits[i].m_Radius;
+        }
     }
 
     void Update()
     {
+
+        camLookAt.position = Vector3.Lerp(transform.position, player_2.transform.position, 0.5f);
+
+        for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
+        {
+            freelookcam.m_Orbits[i].m_Radius = Mathf.Lerp(freelookcam.m_Orbits[i].m_Radius, originalOrbits[i].m_Radius * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
+            freelookcam.m_Orbits[i].m_Height = Mathf.Lerp(freelookcam.m_Orbits[i].m_Height, originalOrbits[i].m_Height * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
+        }
+
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -141,6 +163,8 @@ public class PlayerController : MonoBehaviour
             for (int i = 0; i < m_InteractablesList.Count; ++i)
                 m_InteractablesList[i].Interact();
         }
+
+
     }
 
     #endregion Unity's example
