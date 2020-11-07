@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MagnetManager : MonoBehaviour
 {
+    [Range(0f, 1000f)]
     public float strength = 1f;
-    public float equilibrium = 5f;
+    [Range(0.25f, 2.0f)]
+    public float ratio = 1f;
+    [Range(0f, 200.0f)]
     public float cutoff = 10f;
 
     public List<Magnetic> magnets = new List<Magnetic>();
@@ -44,37 +47,26 @@ public class MagnetManager : MonoBehaviour
                 float magnitude = separation.magnitude;
                 if (magnitude >= cutoff) continue;
 
-                magnitude += 0.5f;
+                magnitude += 1f;
                 separation.Normalize();
-                float force = (info1.power * info2.power * strength) / magnitude;
+                float force = (info1.power * info2.power * strength) / (magnitude * magnitude);
 
                 if (mag.pole == net.pole)
                 {
                     //Repel
+                    force *= ratio;
                     info1.rb.AddForce(separation * force);
                     info2.rb.AddForce(-separation * force);
                 }
                 else
                 {
                     //Attract
+                    force /= ratio;
                     info1.rb.AddForce(-separation * force);
                     info2.rb.AddForce(separation * force);
                 }
             }
         }
-
-        //foreach(Magnetic mag1 in polar)
-        //{
-        //    MagInfo info1 = mag1.GetInfo();
-
-        //    foreach(Magnetic mag2 in magnets)
-        //    {
-        //        if (mag1 != mag2)
-        //        {
-        //            MagInfo info2 = mag2.GetInfo();
-        //        }
-        //    }
-        //}
     }
 
     public void AddMagnet(Magnetic magnet)
