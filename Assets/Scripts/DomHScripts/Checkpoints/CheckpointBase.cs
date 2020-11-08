@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour
+public abstract class CheckpointBase : MonoBehaviour
 {
     [SerializeField]
     private int m_iCheckpointNumber;
 
     public int CheckpointNumber { get => m_iCheckpointNumber; }
+    public abstract bool ValidCheckpoint { get; }
 
     //prevent 2 players respawning at the same time in the same place
     [SerializeField]
