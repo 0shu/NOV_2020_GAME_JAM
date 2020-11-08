@@ -14,14 +14,14 @@ public class SimpleDemoController : MonoBehaviour
     public Material northMat;
     public Material southMat;
 
+    public MeshRenderer p1Mesh;
+    public MeshRenderer p2Mesh;
+
     private Rigidbody p1Body;
     private Rigidbody p2Body;
 
     private Magnetic p1Mag;
     private Magnetic p2Mag;
-
-    private MeshRenderer p1Mesh;
-    private MeshRenderer p2Mesh;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +32,8 @@ public class SimpleDemoController : MonoBehaviour
         p1Mag = Player1.GetComponent<Magnetic>();
         p2Mag = Player2.GetComponent<Magnetic>();
 
-        p1Mesh = Player1.GetComponent<MeshRenderer>();
-        p2Mesh = Player2.GetComponent<MeshRenderer>();
+        //if (!p1Mesh) p1Mesh = Player1.GetComponent<MeshRenderer>();
+        //if (!p2Mesh) p2Mesh = Player2.GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
