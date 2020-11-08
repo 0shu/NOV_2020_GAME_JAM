@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MagnetManager : MonoBehaviour
 {
-    [Range(0f, 1000f)]
+    [Range(0f, 10000f)]
     public float strength = 1f;
     [Range(0.25f, 2.0f)]
     public float ratio = 1f;
@@ -50,6 +50,7 @@ public class MagnetManager : MonoBehaviour
                 magnitude += 1f;
                 separation.Normalize();
                 float force = (info1.power * info2.power * strength) / (magnitude * magnitude);
+                force *= Time.deltaTime;
 
                 if (mag.pole == net.pole)
                 {

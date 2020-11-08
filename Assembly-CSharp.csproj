@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DomHScripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\PlayerRespawn.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Interactables\Interactable.cs" />
@@ -619,6 +620,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -637,17 +641,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>E:/JAMS/20-21_JAM_1/GDS Jam - Apart/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
