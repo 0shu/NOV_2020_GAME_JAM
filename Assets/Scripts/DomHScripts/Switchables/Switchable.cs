@@ -10,12 +10,12 @@ public abstract class Switchable : MonoBehaviour
     protected abstract void BindSwitch();
     protected abstract void UnbindSwitch();
 
-    private void Start()
+    protected void Init()
     {
         BindSwitch();
     }
 
-    private void OnDestroy()
+    protected void UnInit()
     {
         UnbindSwitch();
     }
