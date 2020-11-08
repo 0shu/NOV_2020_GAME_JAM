@@ -11,7 +11,13 @@ public class MoveBySwitch : SwitchableVoid
 
     private void Start()
     {
+        Init();
         m_StartPosition = transform.position;
+    }
+
+    private void OnDestroy()
+    {
+        UnInit();
     }
 
     protected override void DoAction()
