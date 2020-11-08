@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\SwitchableExample.cs" />
     <Compile Include="Assets\Scripts\Simons\MagnetManager.cs" />
     <Compile Include="Assets\Scripts\Simons\Magnetic.cs" />
+    <Compile Include="Assets\Scripts\Simons\SimpleDemoController.cs" />
     <None Include="Assets\3D Models\Characters\Readme.txt" />
     <None Include="Assets\Scripts\Readme.txt" />
     <None Include="Assets\Audio\Music\Readme.txt" />
