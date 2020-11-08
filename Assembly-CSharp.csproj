@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\MainMenuScript.cs" />
     <Compile Include="Assets\Scripts\AudioSourceScript.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\Checkpoint.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switch.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switchable.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\SwitchableExample.cs" />
+    <Compile Include="Assets\Scripts\MenuScript.cs" />
     <Compile Include="Assets\Scripts\Simons\MagnetManager.cs" />
     <Compile Include="Assets\Scripts\Simons\Magnetic.cs" />
     <Compile Include="Assets\Scripts\Simons\SimpleDemoController.cs" />
