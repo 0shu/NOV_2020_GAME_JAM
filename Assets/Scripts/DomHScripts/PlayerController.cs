@@ -18,16 +18,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Player m_Player;
 
-    private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float playerSpeed;
+    private float distanceToGround;
+    public float playerSpeed;
     private const float top_speed = 10f;
     private const float defaultWaddlingSpeed = 4f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
     private const float drag = 0.5f;
 
+    public CapsuleCollider collider;
+
+    public Rigidbody rb;
     public Transform cam;
 #if CINEMACHINE
     public GameObject player_2;
@@ -37,6 +40,13 @@ public class PlayerController : MonoBehaviour
 
     private CinemachineFreeLook.Orbit[] originalOrbits;
 #endif
+
+    public GameObject player_2;
+    public Transform camLookAt;
+
+    public CinemachineFreeLook freelookcam;
+
+    private CinemachineFreeLook.Orbit[] originalOrbits;
 
     private float horizontal;
     private float vertical;
@@ -50,11 +60,11 @@ public class PlayerController : MonoBehaviour
 
     private Boolean Sliding;
     private Boolean Running;
+    private Boolean Jumping;
     
 
     private void Start()
     {
-        controller = gameObject.AddComponent<CharacterController>();
 
 #if CINEMACHINE
         originalOrbits = new CinemachineFreeLook.Orbit[freelookcam.m_Orbits.Length];
@@ -64,6 +74,13 @@ public class PlayerController : MonoBehaviour
             originalOrbits[i].m_Radius = freelookcam.m_Orbits[i].m_Radius;
         }
 #endif
+
+        originalOrbits = new CinemachineFreeLook.Orbit[freelookcam.m_Orbits.Length];
+        for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
+        {
+            originalOrbits[i].m_Height = freelookcam.m_Orbits[i].m_Height;
+            originalOrbits[i].m_Radius = freelookcam.m_Orbits[i].m_Radius;
+        }
     }
 
     void Update()
@@ -77,14 +94,36 @@ public class PlayerController : MonoBehaviour
             freelookcam.m_Orbits[i].m_Radius = Mathf.Lerp(freelookcam.m_Orbits[i].m_Radius, originalOrbits[i].m_Radius * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
             freelookcam.m_Orbits[i].m_Height = Mathf.Lerp(freelookcam.m_Orbits[i].m_Height, originalOrbits[i].m_Height * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.1f);
         }
+
+        freelookcam.m_Lens.FieldOfView =Mathf.Clamp(95f - (Vector3.Distance(transform.position, camLookAt.position) * 0.75f), 60f,95f) ;
+
 #endif
 
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        camLookAt.position = Vector3.Lerp(transform.position, player_2.transform.position, 0.5f);
+
+        for (int i = 0; i < freelookcam.m_Orbits.Length; i++)
         {
-            playerVelocity.y = 0f;
+            freelookcam.m_Orbits[i].m_Radius = Mathf.Lerp(freelookcam.m_Orbits[i].m_Radius, originalOrbits[i].m_Radius * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.05f);
+            freelookcam.m_Orbits[i].m_Height = Mathf.Lerp(freelookcam.m_Orbits[i].m_Height, originalOrbits[i].m_Height * (1 + (0.5f * Vector3.Distance(transform.position, camLookAt.position))), 0.05f);
         }
 
+        freelookcam.m_Lens.FieldOfView = Mathf.Clamp(95f - (Vector3.Distance(transform.position, camLookAt.position) * 0.75f), 60f, 95f);
+
+
+        distanceToGround = collider.bounds.extents.y;        
+
+        groundedPlayer = Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.2f);
+
+        /*
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;            
+        }
+        */
+        if (groundedPlayer && Jumping)
+        {
+            Jumping = false;
+        }
         if (m_Player == Player.One)
         {
             horizontal = Input.GetAxisRaw("HorizontalPlayer1");
@@ -113,7 +152,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (playerSpeed <= defaultWaddlingSpeed)
                 {
-                    playerSpeed += 0.5f * direction.magnitude; // ground acceleration to waddling speed
+                    playerSpeed += 1.0f * direction.magnitude; // ground acceleration to waddling speed
                 }
             }
 
@@ -136,18 +175,21 @@ public class PlayerController : MonoBehaviour
                 
                 if (Sliding)
                 {
-                    playerSpeed -= 0.05f * Time.deltaTime;
+                    playerSpeed -= 0.25f * Time.deltaTime;
                     Debug.Log("Sliding!");
                 }
                 else
                 {
-                    playerSpeed -= 5.0f * Time.deltaTime;
+                    playerSpeed -= 8f * Time.deltaTime;
                 }
             }
         }
 
         moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        controller.Move(moveDirection.normalized * Time.deltaTime * playerSpeed);
+        //controller.Move(moveDirection.normalized * Time.deltaTime * playerSpeed);
+
+        //rb.AddForce(moveDirection.normalized * playerSpeed * 10000f, ForceMode.Acceleration);
+        
 
 
         // Changes the height position of the player..
@@ -155,7 +197,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("JumpPlayer1") && groundedPlayer)
             {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                Jumping = true;
+                //playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                moveDirection.y += jumpHeight * -3.0f * gravityValue;
+                //rb.AddForce(Vector3.up * jumpHeight * -3.0f * gravityValue);
             }
 
 
@@ -200,8 +245,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        //playerVelocity.y += gravityValue * Time.deltaTime;
+        moveDirection.y += gravityValue * Time.deltaTime;
+        //controller.Move(playerVelocity * Time.deltaTime);
 
 
         if (m_Player == Player.One)
@@ -224,6 +270,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        rb.velocity = moveDirection.normalized * playerSpeed;
+        //rb.velocity = playerVelocity;
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
