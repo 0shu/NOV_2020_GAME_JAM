@@ -6,7 +6,7 @@ public class PlayerRespawn : MonoBehaviour
 {
     CharacterController m_CharacterController;
     Rigidbody m_Rigidbody;
-    Checkpoint m_LastCheckpoint;
+    CheckpointBase m_LastCheckpoint;
     Vector3 m_StartPosition;
 
     private void Start()
@@ -15,19 +15,22 @@ public class PlayerRespawn : MonoBehaviour
         m_StartPosition = transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.name == "KillPlane")
             Respawn();
 
-        Checkpoint checkpoint = other.GetComponent<Checkpoint>();
+        CheckpointBase checkpoint = other.GetComponent<CheckpointBase>();
 
         if (checkpoint != null)
         {
-            if (m_LastCheckpoint == null)
-                m_LastCheckpoint = checkpoint;
-            else if (checkpoint.CheckpointNumber > m_LastCheckpoint.CheckpointNumber)
-                m_LastCheckpoint = checkpoint;
+            if (checkpoint.ValidCheckpoint == true)
+            {
+                if (m_LastCheckpoint == null)
+                    m_LastCheckpoint = checkpoint;
+                else if (checkpoint.CheckpointNumber > m_LastCheckpoint.CheckpointNumber)
+                    m_LastCheckpoint = checkpoint;
+            }
         }
     }
 
@@ -39,8 +42,6 @@ public class PlayerRespawn : MonoBehaviour
 
     private void Respawn()
     {
-        CharacterController x = GetComponent<CharacterController>();
-        x.enabled = false;
         if (m_LastCheckpoint != null)
             transform.position = m_LastCheckpoint.SpawnPosition;
         else
@@ -49,6 +50,5 @@ public class PlayerRespawn : MonoBehaviour
         m_Rigidbody.velocity = Vector3.zero;
 
         Debug.Log($"Respawn() : {transform.position}");
-        x.enabled = true;
     }
 }
