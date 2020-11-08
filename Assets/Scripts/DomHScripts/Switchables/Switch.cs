@@ -50,7 +50,7 @@ public class Switch : Interactable
 
     private void OnDestroy()
     {
-        m_SwitchEventVoid.RemoveAllListeners();
-        m_SwitchEventBool.RemoveAllListeners();
+        m_SwitchEventVoid?.RemoveAllListeners();
+        m_SwitchEventBool?.RemoveAllListeners();
     }
 }

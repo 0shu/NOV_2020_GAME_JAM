@@ -39,8 +39,6 @@ public class PlayerRespawn : MonoBehaviour
 
     private void Respawn()
     {
-        CharacterController x = GetComponent<CharacterController>();
-        x.enabled = false;
         if (m_LastCheckpoint != null)
             transform.position = m_LastCheckpoint.SpawnPosition;
         else
@@ -49,6 +47,5 @@ public class PlayerRespawn : MonoBehaviour
         m_Rigidbody.velocity = Vector3.zero;
 
         Debug.Log($"Respawn() : {transform.position}");
-        x.enabled = true;
     }
 }

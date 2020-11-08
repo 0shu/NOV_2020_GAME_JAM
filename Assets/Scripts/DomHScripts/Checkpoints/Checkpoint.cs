@@ -24,9 +24,9 @@ public class Checkpoint : MonoBehaviour
             spawnA = !spawnA;
 
             if (spawnA == true)
-                return m_SpawnPositionA;
+                return transform.position + m_SpawnPositionA;
             else
-                return m_SpawnPositionB;
+                return transform.position + m_SpawnPositionB;
         }
     }
 }
