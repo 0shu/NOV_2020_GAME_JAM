@@ -145,14 +145,17 @@ public class PlayerController : MonoBehaviour
             {
                 if (playerSpeed <= top_speed)
                 {
-                    playerSpeed += 0.25f * direction.magnitude; // ground acceleration to waddling speed
+                    playerSpeed += 0.5f * direction.magnitude; // ground acceleration to waddling speed
                 }
             }
             else
             {
                 if (playerSpeed <= defaultWaddlingSpeed)
                 {
-                    playerSpeed += 1.0f * direction.magnitude; // ground acceleration to waddling speed
+                    if (!Sliding)
+                    {
+                        playerSpeed += 1.0f * direction.magnitude; // ground acceleration to waddling speed
+                    }
                 }
             }
 
@@ -214,10 +217,13 @@ public class PlayerController : MonoBehaviour
                 Running = false;
             }
 
-            if (Input.GetButtonDown("SlidePlayer1") && playerSpeed > 0)
+            if (Input.GetButton("SlidePlayer1") && playerSpeed > 0)
             {
                 Sliding = true;
-
+            }
+            else
+            {
+                Sliding = false;
             }
         }
         else if (m_Player == Player.Two)
