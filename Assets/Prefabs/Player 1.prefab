@@ -202,6 +202,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: 1
+  northMat: {fileID: 2100000, guid: 1176a6bea047d2e41a8b6bac586e801f, type: 2}
+  southMat: {fileID: 2100000, guid: e098a10de37f1cc4a92137bcc7443497, type: 2}
+  meshRend: {fileID: 1697636015}
   movePower: 4
   m_fJumpPower: 1
 --- !u!1 &2137922446497371934
