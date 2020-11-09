@@ -82,7 +82,10 @@ public class DomPlayerController : MonoBehaviour
 
         //Jump
         if (m_bJumping)
+        {
             m_Rigidbody.AddForce(Vector3.up * m_fJumpPower * -3.0f * m_kfGravity);
+            m_bJumping = false;
+        }
     }
 
     void Update()
