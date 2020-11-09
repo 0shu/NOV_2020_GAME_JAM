@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Materials\Water\WaterScript.cs" />
      <Compile Include="Assets\Scenes\MainMenuScript.cs" />
      <Compile Include="Assets\Scripts\AudioSourceScript.cs" />
      <Compile Include="Assets\Scripts\DomHScripts\CameraController.cs" />
@@ -76,6 +77,7 @@
      <Compile Include="Assets\Scripts\Simons\Magnetic.cs" />
      <Compile Include="Assets\Scripts\Simons\SimpleDemoController.cs" />
      <None Include="Assets\3D Models\Characters\Readme.txt" />
+     <None Include="Assets\Materials\Water\WaterShader.shader" />
      <None Include="Assets\Scripts\Readme.txt" />
      <None Include="Assets\Audio\Music\Readme.txt" />
      <None Include="Assets\Animation\Readme.txt" />
