@@ -8,6 +8,7 @@ using UnityEngine;
 public class DomPlayerController : MonoBehaviour
 {
     List<Interactable> m_InteractablesList = new List<Interactable>();
+    List<Grabbable> m_GrabbablesList = new List<Grabbable>();
 
     public enum Player
     {
@@ -107,6 +108,15 @@ public class DomPlayerController : MonoBehaviour
                 m_InteractablesList[i].Interact();
             Debug.Log("Interact");
         }
+
+        //Grab
+        if (    (Input.GetButtonDown("GrabPlayer1") && m_Player == Player.One)
+            ||  (Input.GetButtonDown("GrabPlayer2") && m_Player == Player.Two))
+        {
+            for (int i = 0; i < m_GrabbablesList.Count; ++i)
+                m_GrabbablesList[i].Grab(gameObject);
+            Debug.Log("Grab");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -117,6 +127,13 @@ public class DomPlayerController : MonoBehaviour
             if (m_InteractablesList.Contains(interactable) == false)
                 m_InteractablesList.Add(interactable);
         }
+
+        Grabbable grabbable = other.gameObject.GetComponent<Grabbable>();
+        if (grabbable != null)
+        {
+            if (m_GrabbablesList.Contains(grabbable) == false)
+                m_GrabbablesList.Add(grabbable);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -126,6 +143,13 @@ public class DomPlayerController : MonoBehaviour
         {
             if (m_InteractablesList.Contains(interactable) == true)
                 m_InteractablesList.Remove(interactable);
+        }
+
+        Grabbable grabbable = other.gameObject.GetComponent<Grabbable>();
+        if (grabbable != null)
+        {
+            if (m_GrabbablesList.Contains(grabbable) == true)
+                m_GrabbablesList.Remove(grabbable);
         }
     }
 }
