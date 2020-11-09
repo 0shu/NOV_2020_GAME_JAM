@@ -1,0 +1,54 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerRespawn : MonoBehaviour
+{
+    CharacterController m_CharacterController;
+    Rigidbody m_Rigidbody;
+    CheckpointBase m_LastCheckpoint;
+    Vector3 m_StartPosition;
+
+    private void Start()
+    {
+        m_Rigidbody = GetComponent<Rigidbody>();
+        m_StartPosition = transform.position;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.name == "KillPlane")
+            Respawn();
+
+        CheckpointBase checkpoint = other.GetComponent<CheckpointBase>();
+
+        if (checkpoint != null)
+        {
+            if (checkpoint.ValidCheckpoint == true)
+            {
+                if (m_LastCheckpoint == null)
+                    m_LastCheckpoint = checkpoint;
+                else if (checkpoint.CheckpointNumber > m_LastCheckpoint.CheckpointNumber)
+                    m_LastCheckpoint = checkpoint;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (transform.position.y < -10)
+            Respawn();
+    }
+
+    private void Respawn()
+    {
+        if (m_LastCheckpoint != null)
+            transform.position = m_LastCheckpoint.SpawnPosition;
+        else
+            transform.position = m_StartPosition;
+
+        m_Rigidbody.velocity = Vector3.zero;
+
+        Debug.Log($"Respawn() : {transform.position}");
+    }
+}

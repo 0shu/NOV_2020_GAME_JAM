@@ -9,7 +9,7 @@ public abstract class Interactable : MonoBehaviour
     protected bool m_bInRange = false;
     protected bool m_bInteracted = false;
 
-    public void Interact() // Player calls this
+    public void Interact() // Player script calls this
     {
         if (m_bInRange && m_bInteracted == false)
         {
