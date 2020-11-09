@@ -39,8 +39,8 @@ public class SimpleDemoController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*p1Body.AddForce((Vector3.back * movePower * Input.GetAxis("HorizontalPlayer1")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer1")));
-        p2Body.AddForce((Vector3.back * movePower * Input.GetAxis("HorizontalPlayer2")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer2")));*/
+        p1Body.AddForce((Vector3.back * movePower * Input.GetAxis("HorizontalPlayer1")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer1")));
+        p2Body.AddForce((Vector3.back * movePower * Input.GetAxis("HorizontalPlayer2")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer2")));
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

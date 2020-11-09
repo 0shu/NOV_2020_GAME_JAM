@@ -17,6 +17,9 @@ public class DomPlayerController : MonoBehaviour
     }
 
     public Player m_Player;
+    public Material northMat;
+    public Material southMat;
+    public MeshRenderer meshRend;
 
     [Range(0f, 10f)]
     public float movePower = 2f;
@@ -53,11 +56,11 @@ public class DomPlayerController : MonoBehaviour
 
         if (m_Player == Player.One)
         {
-            m_Rigidbody.AddForce((Vector3.back * movePower * Input.GetAxis("HorizontalPlayer1")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer1")));
+            m_Rigidbody.AddForce((Camera.main.transform.forward * movePower * Input.GetAxis("HorizontalPlayer1")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer1")));
         }
         else if (m_Player == Player.Two)
         {
-            m_Rigidbody.AddForce((Vector3.back * movePower * Input.GetAxis("HorizontalPlayer2")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer2")));
+            m_Rigidbody.AddForce((Camera.main.transform.forward * movePower * Input.GetAxis("HorizontalPlayer2")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer2")));
         }
 
         //angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref TurnSmoothVelocity, 1f * Time.deltaTime);
@@ -74,6 +77,16 @@ public class DomPlayerController : MonoBehaviour
 
     void Update()
     {
+        //Jump
+        if (    (Input.GetButtonDown("PolarityPlayer1") && m_Player == Player.One)
+            ||  (Input.GetButtonDown("PolarityPlayer2") && m_Player == Player.Two))
+        {
+            Magnetic mag = GetComponent<Magnetic>();
+            mag.Swap();
+            if (mag.pole == Polarity.North) meshRend.material = northMat;
+            else if (mag.pole == Polarity.South) meshRend.material = southMat;
+        }
+
         //Jump
         if (    (Input.GetButtonDown("JumpPlayer1") && m_bGroundedPlayer && m_Player == Player.One)
             ||  (Input.GetButtonDown("JumpPlayer2") && m_bGroundedPlayer && m_Player == Player.Two))
