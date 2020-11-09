@@ -11,10 +11,12 @@ public class Grabbable : MonoBehaviour
     bool m_bIsGrabbed = false;
     GameObject m_GrabbingPlayer;
     Rigidbody m_Rigidbody;
+    Collider m_Collider;
 
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_Collider = GetComponent<Collider>();
     }
 
     public void Grab(GameObject player) // Player script calls this
@@ -22,8 +24,9 @@ public class Grabbable : MonoBehaviour
         if (m_bInRange)
         {
             m_bIsGrabbed = !m_bIsGrabbed;
+            Debug.Log($"Grab: {m_bIsGrabbed}");
             m_Rigidbody.isKinematic = m_bIsGrabbed;
-            m_Rigidbody.detectCollisions = !m_bIsGrabbed;
+            m_Collider.isTrigger = m_bIsGrabbed;
 
             if (m_bIsGrabbed == true)
                 m_GrabbingPlayer = player;
