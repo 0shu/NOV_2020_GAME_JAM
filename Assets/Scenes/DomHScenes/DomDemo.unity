@@ -2101,9 +2101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795aa14ac7b0eec418becf07549b10bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 1063
+  strength: 495
   ratio: 0.82
-  cutoff: 40
+  cutoff: 15.4
   magnets: []
 --- !u!4 &456086222
 Transform:
