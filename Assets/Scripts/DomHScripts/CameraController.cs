@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     Camera m_Camera;
     const int m_kiMaxDistFromEdge = 50;
-    const float m_kfMaxScale = 2.5f;
+    const float m_kfMaxScale = 3.5f;
     float m_fStartingDistance;
     float m_fScale = 1f;
     float m_fSmoothTime = 0.2f;
