@@ -138,7 +138,6 @@ public class DomPlayerController : MonoBehaviour
         {
             for (int i = 0; i < m_GrabbablesList.Count; ++i)
                 m_GrabbablesList[i].Grab(gameObject);
-            Debug.Log("Grab");
         }
     }
 
