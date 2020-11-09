@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Cinemachine;
+//using Cinemachine;
 
 [RequireComponent(typeof(PlayerRespawn))]
 public class PlayerController : MonoBehaviour
 {
-    List<Interactable> m_InteractablesList = new List<Interactable>();
+    /*List<Interactable> m_InteractablesList = new List<Interactable>();
 
     enum Player
     {
@@ -115,12 +115,7 @@ public class PlayerController : MonoBehaviour
 
         groundedPlayer = Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.2f);
 
-        /*
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;            
-        }
-        */
+
         if (groundedPlayer && Jumping)
         {
             Jumping = false;
@@ -297,4 +292,5 @@ public class PlayerController : MonoBehaviour
                 m_InteractablesList.Remove(interactable);
         }
     }
+*/
 }

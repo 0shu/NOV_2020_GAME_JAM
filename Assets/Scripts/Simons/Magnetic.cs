@@ -8,25 +8,45 @@ public class Magnetic : MonoBehaviour
     public float power = 1f;
     public Polarity pole = Polarity.Neutral;
     public Rigidbody rb;
+    public MeshRenderer glowMesh;
+
+    public Material northMat;
+    public Material southMat;
+    public Material neutralMat;
 
     // Start is called before the first frame update
     void Start()
     {
         if (manager) manager.AddMagnet(this);
         else Debug.LogWarning("Magnet does not have manager!");
+        if (!glowMesh) Debug.LogWarning("No mesh renderer attached, waht will glow?");
 
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
-    public void SetNeutral() { pole = Polarity.Neutral; }
-    public void SetNorth() { pole = Polarity.North; }
-    public void SetSouth() { pole = Polarity.South; }
+    public void SetNeutral() 
+    { 
+        pole = Polarity.Neutral;
+        glowMesh.material = neutralMat;
+    }
+
+    public void SetNorth() 
+    { 
+        pole = Polarity.North;
+        glowMesh.material = northMat;
+    }
+
+    public void SetSouth() 
+    { 
+        pole = Polarity.South;
+        glowMesh.material = southMat;
+    }
 
     public void Swap()
     {
-        if(pole == Polarity.North) pole = Polarity.South; 
-        else if(pole == Polarity.South) pole = Polarity.North;
-        else if(pole == Polarity.Neutral)
+        if (pole == Polarity.North) SetSouth();
+        else if (pole == Polarity.South) SetNorth();
+        else if (pole == Polarity.Neutral)
         {
             Debug.Log("Tried to swap neutral polarity, nothing to swap it to!");
         }
