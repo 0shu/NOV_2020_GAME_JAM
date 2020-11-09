@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     Camera m_Camera;
     const int m_kiMaxDistFromEdge = 50;
-    const float m_kfMaxScale = 3.5f;
+    const float m_kfMaxScale = 4.5f;
     float m_fStartingOrthoSize;
     float m_fStartingDistance;
     float m_fScale = 1f;
@@ -56,6 +56,6 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, middlePos - transform.forward * m_fStartingDistance * m_fScale, m_fSmoothTime);
 
         if (m_Camera.orthographic)
-            m_Camera.orthographicSize = /*Mathf.Lerp(m_fStartingOrthoSize, */m_fStartingOrthoSize * m_fScale;//, );
+            m_Camera.orthographicSize = Mathf.Lerp(m_Camera.orthographicSize, m_fStartingOrthoSize * m_fScale, m_fSmoothTime);
     }
 }
