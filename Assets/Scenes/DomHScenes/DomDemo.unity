@@ -660,6 +660,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 638639255, guid: 107871aea06e880459e8db55bb6cbb64, type: 3}
+      propertyPath: movePower
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2073149580531794867, guid: 107871aea06e880459e8db55bb6cbb64,
         type: 3}
       propertyPath: m_Name
@@ -1375,6 +1379,9 @@ GameObject:
   - component: {fileID: 358437461}
   - component: {fileID: 358437460}
   - component: {fileID: 358437463}
+  - component: {fileID: 358437466}
+  - component: {fileID: 358437465}
+  - component: {fileID: 358437464}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1461,6 +1468,101 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player1: {fileID: 638639254}
   m_Player2: {fileID: 1916432943}
+--- !u!114 &358437464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358437459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 81b00bd9e270439479a4c3da00692ec4, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 0.629
+  priority: 1.25
+--- !u!114 &358437465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358437459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 358437462}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
+--- !u!114 &358437466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358437459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c520d478f3d2445429bd7ac9c92b03a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessLayer: {fileID: 0}
+  lightMeter: 0
+  histogram: 0
+  waveform: 0
+  vectorscope: 0
+  debugOverlay: 0
 --- !u!1001 &371567535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2101,8 +2203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795aa14ac7b0eec418becf07549b10bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 1063
-  ratio: 0.82
+  strength: 2108
+  ratio: 0.91
   cutoff: 40
   magnets: []
 --- !u!4 &456086222
@@ -3528,6 +3630,11 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 456086221}
+    - target: {fileID: 4740285519649453593, guid: 6520546655b32004ebb2bc0ec008d251,
+        type: 3}
+      propertyPath: movePower
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6520546655b32004ebb2bc0ec008d251, type: 3}
 --- !u!1001 &1026179043

@@ -17,11 +17,8 @@ public class DomPlayerController : MonoBehaviour
     }
 
     public Player m_Player;
-    public Material northMat;
-    public Material southMat;
-    public MeshRenderer meshRend;
 
-    [Range(0f, 10f)]
+    [Range(0f, 100f)]
     public float movePower = 2f;
     public float m_fJumpPower = 1.0f;
 
@@ -96,8 +93,6 @@ public class DomPlayerController : MonoBehaviour
         {
             Magnetic mag = GetComponent<Magnetic>();
             mag.Swap();
-            if (mag.pole == Polarity.North) meshRend.material = northMat;
-            else if (mag.pole == Polarity.South) meshRend.material = southMat;
         }
 
         //Jump
