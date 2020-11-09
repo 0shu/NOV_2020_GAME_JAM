@@ -30,7 +30,7 @@ public abstract class SwitchableVoid : Switchable
 
     protected override void UnbindSwitch()
     {
-        m_ControllingSwitch.RemoveBehaviour(DoAction);
+        m_ControllingSwitch?.RemoveBehaviour(DoAction);
     }
 
     protected abstract void DoAction();
@@ -45,7 +45,7 @@ public abstract class SwitchableBool : Switchable
 
     protected override void UnbindSwitch()
     {
-        m_ControllingSwitch.RemoveBehaviour(DoAction);
+        m_ControllingSwitch?.RemoveBehaviour(DoAction);
     }
 
     protected abstract void DoAction(bool switchStatus);
