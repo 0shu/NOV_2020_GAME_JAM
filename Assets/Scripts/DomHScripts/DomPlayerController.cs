@@ -54,14 +54,24 @@ public class DomPlayerController : MonoBehaviour
             m_bJumping = false;
         }
 
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight = Camera.main.transform.right;
+        float horizontal = 0;
+        float vertical = 0;
+
         if (m_Player == Player.One)
         {
-            m_Rigidbody.AddForce((Camera.main.transform.forward * movePower * Input.GetAxis("HorizontalPlayer1")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer1")));
+            horizontal = Input.GetAxis("HorizontalPlayer1") * movePower;
+            vertical = Input.GetAxis("VerticalPlayer1") * movePower;
         }
         else if (m_Player == Player.Two)
         {
-            m_Rigidbody.AddForce((Camera.main.transform.forward * movePower * Input.GetAxis("HorizontalPlayer2")) + (Vector3.right * movePower * Input.GetAxis("VerticalPlayer2")));
+            horizontal = Input.GetAxis("HorizontalPlayer2") * movePower;
+            vertical = Input.GetAxis("VerticalPlayer2") * movePower;
         }
+
+        m_Rigidbody.AddForce(new Vector3(camForward.x, 0, camForward.z).normalized * camForward.magnitude * vertical);
+        m_Rigidbody.AddForce(new Vector3(camRight.x, 0, camRight.z).normalized * camRight.magnitude * horizontal);
 
         //angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref TurnSmoothVelocity, 1f * Time.deltaTime);
 
