@@ -365,6 +365,11 @@ PrefabInstance:
       propertyPath: movePower
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4740285519649453593, guid: 6520546655b32004ebb2bc0ec008d251,
+        type: 3}
+      propertyPath: pengAnim
+      value: 
+      objectReference: {fileID: 435623371}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6520546655b32004ebb2bc0ec008d251, type: 3}
 --- !u!1001 &318613106
@@ -1284,6 +1289,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3007501014622469037}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2073149581051490720 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2744877437446376720, guid: 107871aea06e880459e8db55bb6cbb64,
+    type: 3}
+  m_PrefabInstance: {fileID: 3007501014622469037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3007501014622469037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1295,6 +1306,10 @@ PrefabInstance:
       propertyPath: movePower
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 638639255, guid: 107871aea06e880459e8db55bb6cbb64, type: 3}
+      propertyPath: pengAnim
+      value: 
+      objectReference: {fileID: 2073149581051490720}
     - target: {fileID: 2073149580531794867, guid: 107871aea06e880459e8db55bb6cbb64,
         type: 3}
       propertyPath: m_Name
