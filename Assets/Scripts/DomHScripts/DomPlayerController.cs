@@ -10,6 +10,8 @@ public class DomPlayerController : MonoBehaviour
     List<Interactable> m_InteractablesList = new List<Interactable>();
     List<Grabbable> m_GrabbablesList = new List<Grabbable>();
 
+    // Animator
+    public Animator pengAnim;
     public enum Player
     {
         One = 1,
@@ -49,6 +51,7 @@ public class DomPlayerController : MonoBehaviour
         if (m_bGroundedPlayer && m_bJumping)
         {
             m_bJumping = false;
+            pengAnim.SetBool("isJumping", false);
         }
 
         Vector3 camForward = Camera.main.transform.forward;
@@ -80,6 +83,7 @@ public class DomPlayerController : MonoBehaviour
         //Jump
         if (m_bJumping)
         {
+            pengAnim.SetBool("isJumping", true);
             m_Rigidbody.AddForce(Vector3.up * m_fJumpPower * -3.0f * m_kfGravity);
             m_bJumping = false;
         }
@@ -87,7 +91,7 @@ public class DomPlayerController : MonoBehaviour
 
     void Update()
     {
-        //Jump
+        // Polarity swap
         if (    (Input.GetButtonDown("PolarityPlayer1") && m_Player == Player.One)
             ||  (Input.GetButtonDown("PolarityPlayer2") && m_Player == Player.Two))
         {
@@ -99,19 +103,22 @@ public class DomPlayerController : MonoBehaviour
         if (    (Input.GetButtonDown("JumpPlayer1") && m_bGroundedPlayer && m_Player == Player.One)
             ||  (Input.GetButtonDown("JumpPlayer2") && m_bGroundedPlayer && m_Player == Player.Two))
         {
+            pengAnim.SetBool("isJumping", true);
             m_bJumping = true;
         }
 
-        //Run
+        // Walking
         if (    (Input.GetButton("RunPlayer1") && m_bGroundedPlayer && m_Player == Player.One)
             ||  (Input.GetButton("RunPlayer2") && m_bGroundedPlayer && m_Player == Player.Two))
         {
             m_bRunning = true;
+            pengAnim.SetBool("isWalking", true);
             m_bSliding = false;
         }
         else
         {
             m_bRunning = false;
+            pengAnim.SetBool("isWalking", false);
         }
 
         //Slide
@@ -119,6 +126,7 @@ public class DomPlayerController : MonoBehaviour
             ||  (Input.GetButtonDown("SlidePlayer2") && m_Player == Player.Two))
         {
             m_bSliding = true;
+            pengAnim.SetBool("isSliding", true);
         }
 
         //Interact
