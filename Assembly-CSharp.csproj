@@ -63,14 +63,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Materials\Water\WaterScript.cs" />
     <Compile Include="Assets\Scenes\MainMenuScript.cs" />
     <Compile Include="Assets\Scripts\AudioSourceScript.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\CheckpointBase.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\DoubleCheckpoint.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\PlayerRespawn.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\SingleCheckpoint.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Interactables\InteractableExample.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\MoveBySwitch.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switch.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switchable.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\SwitchableExample.cs" />
@@ -79,6 +83,7 @@
     <Compile Include="Assets\Scripts\Simons\Magnetic.cs" />
     <Compile Include="Assets\Scripts\Simons\SimpleDemoController.cs" />
     <None Include="Assets\3D Models\Characters\Readme.txt" />
+    <None Include="Assets\Materials\Water\WaterShader.shader" />
     <None Include="Assets\Scripts\Readme.txt" />
     <None Include="Assets\Audio\Music\Readme.txt" />
     <None Include="Assets\Animation\Readme.txt" />
