@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     GameObject m_Player2;
 
     Camera m_Camera;
-    const int m_kiMaxDistFromEdge = 50;
+    public int m_iMaxDistFromEdge = 50;
     const float m_kfMaxScale = 4.5f;
     float m_fStartingOrthoSize;
     float m_fStartingDistance;
@@ -36,17 +36,17 @@ public class CameraController : MonoBehaviour
         Vector3 screenPos2 = m_Camera.WorldToScreenPoint(m_Player2.transform.position); //player 2 screen pos
 
         //if the players are at the boundaries
-        if (    (screenPos1.x < m_kiMaxDistFromEdge || Screen.width - screenPos2.x < m_kiMaxDistFromEdge)
-            ||  (screenPos2.x < m_kiMaxDistFromEdge || Screen.width - screenPos1.x < m_kiMaxDistFromEdge)
-            ||  (screenPos1.y < m_kiMaxDistFromEdge || Screen.width - screenPos2.y < m_kiMaxDistFromEdge)
-            ||  (screenPos2.y < m_kiMaxDistFromEdge || Screen.width - screenPos1.y < m_kiMaxDistFromEdge))
+        if (    (screenPos1.x < m_iMaxDistFromEdge || Screen.width - screenPos2.x < m_iMaxDistFromEdge)
+            ||  (screenPos2.x < m_iMaxDistFromEdge || Screen.width - screenPos1.x < m_iMaxDistFromEdge)
+            ||  (screenPos1.y < m_iMaxDistFromEdge || Screen.width - screenPos2.y < m_iMaxDistFromEdge)
+            ||  (screenPos2.y < m_iMaxDistFromEdge || Screen.width - screenPos1.y < m_iMaxDistFromEdge))
         {
             m_fScale += 0.01f;
         }
-        else if (   (screenPos1.x > 2 * m_kiMaxDistFromEdge && Screen.width - screenPos2.x > 2 * m_kiMaxDistFromEdge)
-            &&      (screenPos2.x > 2 * m_kiMaxDistFromEdge && Screen.width - screenPos1.x > 2 * m_kiMaxDistFromEdge)
-            &&      (screenPos1.y > 2 * m_kiMaxDistFromEdge && Screen.width - screenPos2.y > 2 * m_kiMaxDistFromEdge)
-            &&      (screenPos2.y > 2 * m_kiMaxDistFromEdge && Screen.width - screenPos1.y > 2 * m_kiMaxDistFromEdge))
+        else if (   (screenPos1.x > 2 * m_iMaxDistFromEdge && Screen.width - screenPos2.x > 2 * m_iMaxDistFromEdge)
+            &&      (screenPos2.x > 2 * m_iMaxDistFromEdge && Screen.width - screenPos1.x > 2 * m_iMaxDistFromEdge)
+            &&      (screenPos1.y > 2 * m_iMaxDistFromEdge && Screen.width - screenPos2.y > 2 * m_iMaxDistFromEdge)
+            &&      (screenPos2.y > 2 * m_iMaxDistFromEdge && Screen.width - screenPos1.y > 2 * m_iMaxDistFromEdge))
         {
             m_fScale -= 0.01f;
         }

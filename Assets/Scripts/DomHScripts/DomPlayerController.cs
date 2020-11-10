@@ -11,7 +11,7 @@ public class DomPlayerController : MonoBehaviour
     List<Grabbable> m_GrabbablesList = new List<Grabbable>();
 
     // Animator
-    public Animator pengAnim;
+    private Animator pengAnim;
     public enum Player
     {
         One = 1,
@@ -40,6 +40,7 @@ public class DomPlayerController : MonoBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<CapsuleCollider>();
+        pengAnim = GetComponent<Animator>();
     }
 
     void FixedUpdate()

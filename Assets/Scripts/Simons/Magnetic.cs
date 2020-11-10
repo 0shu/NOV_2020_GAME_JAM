@@ -7,7 +7,7 @@ public class Magnetic : MonoBehaviour
     public MagnetManager manager;
     public float power = 1f;
     public Polarity pole = Polarity.Neutral;
-    public Rigidbody rb;
+    private Rigidbody rb;
     public MeshRenderer glowMesh;
 
     public Material northMat;

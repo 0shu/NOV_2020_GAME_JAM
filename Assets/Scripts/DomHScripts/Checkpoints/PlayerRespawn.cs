@@ -8,6 +8,7 @@ public class PlayerRespawn : MonoBehaviour
     Rigidbody m_Rigidbody;
     CheckpointBase m_LastCheckpoint;
     Vector3 m_StartPosition;
+    bool m_bRespawning = false;
 
     private void Start()
     {
@@ -15,11 +16,20 @@ public class PlayerRespawn : MonoBehaviour
         m_StartPosition = transform.position;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Kill")
+        {
+            m_bRespawning = true;
+            IEnumerator coroutine = DelayedRespawn();
+            StartCoroutine(coroutine);
+
+            //play splash
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "KillPlane")
-            Respawn();
-
         CheckpointBase checkpoint = other.GetComponent<CheckpointBase>();
 
         if (checkpoint != null)
@@ -40,6 +50,12 @@ public class PlayerRespawn : MonoBehaviour
             Respawn();
     }
 
+    private void LateUpdate()
+    {
+        if (m_bRespawning)
+            m_Rigidbody.velocity /= 10;
+    }
+
     private void Respawn()
     {
         if (m_LastCheckpoint != null)
@@ -50,5 +66,12 @@ public class PlayerRespawn : MonoBehaviour
         m_Rigidbody.velocity = Vector3.zero;
 
         Debug.Log($"Respawn() : {transform.position}");
+        m_bRespawning = false;
+    }
+
+    private IEnumerator DelayedRespawn()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        Respawn();
     }
 }

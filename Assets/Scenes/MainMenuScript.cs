@@ -10,7 +10,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void PlayGame()
     {
-        //SceneManager.LoadScene(); As of now idk what scene to load so after the main game is ready just put the scene i guess
+        SceneManager.LoadScene(1);
     }
 
     public void ExitGame()
