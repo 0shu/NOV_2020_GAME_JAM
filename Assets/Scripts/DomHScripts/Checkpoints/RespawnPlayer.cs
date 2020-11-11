@@ -22,7 +22,7 @@ public class RespawnPlayer : RespawnBasic
         }
     }
 
-    protected new void Respawn()
+    protected override void Respawn()
     {
         base.Respawn();
 

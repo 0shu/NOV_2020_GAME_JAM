@@ -39,7 +39,7 @@ public class RespawnBasic : MonoBehaviour
         }
     }
 
-    protected void Respawn()
+    protected virtual void Respawn()
     {
         transform.position = m_StartPosition;
         m_Rigidbody.velocity = Vector3.zero;
