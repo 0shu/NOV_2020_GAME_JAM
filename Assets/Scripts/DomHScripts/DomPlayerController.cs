@@ -45,7 +45,7 @@ public class DomPlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        m_fDistanceToGround = m_Collider.bounds.extents.y;
+        /*m_fDistanceToGround = m_Collider.bounds.extents.y;
 
         m_bGroundedPlayer = Physics.Raycast(transform.position, Vector3.down, m_fDistanceToGround + 0.2f);
 
@@ -53,7 +53,7 @@ public class DomPlayerController : MonoBehaviour
         {
             m_bJumping = false;
             pengAnim.SetBool("isJumping", false);
-        }
+        }*/
 
         Vector3 camForward = Camera.main.transform.forward;
         Vector3 camRight = Camera.main.transform.right;
@@ -77,23 +77,21 @@ public class DomPlayerController : MonoBehaviour
         else
             pengAnim.SetBool("isWalking", false);
 
-        m_Rigidbody.AddForce(new Vector3(camForward.x, 0, camForward.z).normalized * camForward.magnitude * vertical);
-        m_Rigidbody.AddForce(new Vector3(camRight.x, 0, camRight.z).normalized * camRight.magnitude * horizontal);
+        Vector3 forceA = new Vector3(camForward.x, 0, camForward.z).normalized * vertical;
+        Vector3 forceB = new Vector3(camRight.x, 0, camRight.z).normalized * horizontal;
+        m_Rigidbody.AddForce(forceA + forceB);
 
-        //angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref TurnSmoothVelocity, 1f * Time.deltaTime);
+        Vector3 x = new Vector3();
+        transform.LookAt(Vector3.SmoothDamp(transform.position + transform.forward, transform.position + (forceA + forceB), ref x, 0.1f), Vector3.up);
 
-        // transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-
-        //moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-        //Jump
+        /*//Jump
         if (m_bJumping)
         {
             pengAnim.SetBool("isJumping", true);
             m_Rigidbody.AddForce(Vector3.up * m_fJumpPower * -3.0f * m_kfGravity);
             m_bJumping = false;
-        }
+        }*/
     }
 
     void Update()
@@ -106,7 +104,7 @@ public class DomPlayerController : MonoBehaviour
             mag.Swap();
         }
 
-        //Jump
+        /*//Jump
         if (    (Input.GetButtonDown("JumpPlayer1") && m_bGroundedPlayer && m_Player == Player.One)
             ||  (Input.GetButtonDown("JumpPlayer2") && m_bGroundedPlayer && m_Player == Player.Two))
         {
@@ -134,7 +132,7 @@ public class DomPlayerController : MonoBehaviour
         {
             m_bSliding = true;
             pengAnim.SetBool("isSliding", true);
-        }
+        }*/
 
         //Interact
         if (    (Input.GetButtonDown("InteractPlayer1") && m_Player == Player.One)
