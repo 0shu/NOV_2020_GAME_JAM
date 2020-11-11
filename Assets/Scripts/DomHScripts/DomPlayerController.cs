@@ -71,6 +71,12 @@ public class DomPlayerController : MonoBehaviour
             vertical = Input.GetAxis("VerticalPlayer2") * movePower;
         }
 
+        if ((m_Player == Player.One && (Input.GetButton("HorizontalPlayer1") || Input.GetButton("VerticalPlayer1")))
+            || (m_Player == Player.Two && (Input.GetButton("HorizontalPlayer2") || Input.GetButton("VerticalPlayer2"))))
+            pengAnim.SetBool("isWalking", true);
+        else
+            pengAnim.SetBool("isWalking", false);
+
         m_Rigidbody.AddForce(new Vector3(camForward.x, 0, camForward.z).normalized * camForward.magnitude * vertical);
         m_Rigidbody.AddForce(new Vector3(camRight.x, 0, camRight.z).normalized * camRight.magnitude * horizontal);
 
@@ -108,18 +114,18 @@ public class DomPlayerController : MonoBehaviour
             m_bJumping = true;
         }
 
-        // Walking
+        // Running
         if (    (Input.GetButton("RunPlayer1") && m_bGroundedPlayer && m_Player == Player.One)
             ||  (Input.GetButton("RunPlayer2") && m_bGroundedPlayer && m_Player == Player.Two))
         {
             m_bRunning = true;
-            pengAnim.SetBool("isWalking", true);
+            pengAnim.SetBool("isRunning", true);
             m_bSliding = false;
         }
         else
         {
             m_bRunning = false;
-            pengAnim.SetBool("isWalking", false);
+            pengAnim.SetBool("isRunning", false);
         }
 
         //Slide
