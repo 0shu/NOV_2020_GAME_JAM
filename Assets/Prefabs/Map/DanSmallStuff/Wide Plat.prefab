@@ -52,6 +52,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4245645564423759805}
     m_Modifications:
+    - target: {fileID: 8537428957337029666, guid: 4b82c73e681ccf949b383455723ca475,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 8537428957337029669, guid: 4b82c73e681ccf949b383455723ca475,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -263,6 +269,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 653130489550356103, guid: 07c22e6ececfaea45af8c23f2c0f7203,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 653130489550356108, guid: 07c22e6ececfaea45af8c23f2c0f7203,
         type: 3}
       propertyPath: m_Name
@@ -445,6 +457,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4245645564423759805}
     m_Modifications:
+    - target: {fileID: 8537428957337029666, guid: 4b82c73e681ccf949b383455723ca475,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 8537428957337029669, guid: 4b82c73e681ccf949b383455723ca475,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -575,6 +593,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 653130489550356103, guid: 07c22e6ececfaea45af8c23f2c0f7203,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 653130489550356108, guid: 07c22e6ececfaea45af8c23f2c0f7203,
         type: 3}
       propertyPath: m_Name
@@ -595,6 +619,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4245645564423759805}
     m_Modifications:
+    - target: {fileID: 8537428957337029666, guid: 4b82c73e681ccf949b383455723ca475,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 8537428957337029669, guid: 4b82c73e681ccf949b383455723ca475,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -751,6 +781,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4245645564423759805}
     m_Modifications:
+    - target: {fileID: 8537428957337029666, guid: 4b82c73e681ccf949b383455723ca475,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 8537428957337029669, guid: 4b82c73e681ccf949b383455723ca475,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -826,6 +862,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4245645564423759805}
     m_Modifications:
+    - target: {fileID: 8537428957337029666, guid: 4b82c73e681ccf949b383455723ca475,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 8537428957337029669, guid: 4b82c73e681ccf949b383455723ca475,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -961,6 +1003,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: X Iceburg (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 3909400666138535226, guid: 2ea108a8873cfb4428fa90433d33ddd8,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ea108a8873cfb4428fa90433d33ddd8, type: 3}
 --- !u!4 &2254758483736117078 stripped
@@ -1036,6 +1084,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: X Iceburg (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 3909400666138535226, guid: 2ea108a8873cfb4428fa90433d33ddd8,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ea108a8873cfb4428fa90433d33ddd8, type: 3}
 --- !u!4 &2254758483752172633 stripped
@@ -1111,6 +1165,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: X Iceburg (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 3909400666138535226, guid: 2ea108a8873cfb4428fa90433d33ddd8,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ea108a8873cfb4428fa90433d33ddd8, type: 3}
 --- !u!4 &2254758483894417769 stripped
@@ -1181,6 +1241,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 653130489550356103, guid: 07c22e6ececfaea45af8c23f2c0f7203,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 523b4ece58f459d44bb264bc4293c272,
+        type: 2}
     - target: {fileID: 653130489550356108, guid: 07c22e6ececfaea45af8c23f2c0f7203,
         type: 3}
       propertyPath: m_Name

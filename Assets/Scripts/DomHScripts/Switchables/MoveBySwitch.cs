@@ -9,15 +9,15 @@ public class MoveBySwitch : SwitchableVoid
     public Vector3 m_Translation = new Vector3();
     public float m_fMoveSpeed = 0f;
 
-    private void Start()
+    protected override void Start()
     {
-        Init();
+        base.Start();
         m_StartPosition = transform.position;
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
-        UnInit();
+        base.OnDestroy();
     }
 
     protected override void DoAction()

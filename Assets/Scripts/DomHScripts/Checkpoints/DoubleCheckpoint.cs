@@ -8,13 +8,17 @@ public class DoubleCheckpoint : CheckpointBase
     List<string> m_PlayersInside = new List<string>();
     const int m_kiNumPlayers = 2;
 
-    public override bool ValidCheckpoint { get => m_bValidCheckpoint; }
+    public override bool ValidCheckpoint
+    {
+        get => m_bValidCheckpoint;
+        protected set { m_bValidCheckpoint = value; }
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (m_bValidCheckpoint == false)
+        if (ValidCheckpoint == false)
         {
-            if (other.name.Contains("Player"))
+            if (other.tag == "Player")
             {
                 if (m_PlayersInside.Contains(other.name) == false)
                 {
@@ -23,7 +27,18 @@ public class DoubleCheckpoint : CheckpointBase
             }
 
             if (m_PlayersInside.Count == m_kiNumPlayers)
-                m_bValidCheckpoint = true;
+                ValidCheckpoint = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (ValidCheckpoint == false)
+        {
+            if (other.tag == "Player")
+            {
+                    m_PlayersInside.RemoveAll(names => names == other.name);
+            }
         }
     }
 }

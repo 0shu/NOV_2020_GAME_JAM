@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerRespawn))]
+[RequireComponent(typeof(RespawnPlayer))]
 public class DomPlayerController : MonoBehaviour
 {
     List<Interactable> m_InteractablesList = new List<Interactable>();

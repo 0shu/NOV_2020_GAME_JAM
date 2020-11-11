@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 //using Cinemachine;
 
-[RequireComponent(typeof(PlayerRespawn))]
+[RequireComponent(typeof(RespawnPlayer))]
 public class PlayerController : MonoBehaviour
 {
     /*List<Interactable> m_InteractablesList = new List<Interactable>();

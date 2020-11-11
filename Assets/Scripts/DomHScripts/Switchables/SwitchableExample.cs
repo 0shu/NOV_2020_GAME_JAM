@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SwitchableExample : SwitchableVoid
 {
-    private void Start()
+    protected override void Start()
     {
-        Init(); //Always put this in Start() - takes care of binding the DoAction function
+        base.Start();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
-        UnInit(); //Tidy up
+        base.OnDestroy();
     }
 
     protected override void DoAction()

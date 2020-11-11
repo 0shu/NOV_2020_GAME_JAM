@@ -8,50 +8,46 @@ public class Grabbable : MonoBehaviour
 {
     protected float m_fRange = 1.5f;
     protected bool m_bInRange = false;
-    bool m_bIsGrabbed = false;
+    protected bool m_bIsGrabbed = false;
+    public virtual bool IsGrabbed
+    {
+        get => m_bIsGrabbed;
+        protected set { m_bIsGrabbed = value; }
+    }
     GameObject m_GrabbingPlayer;
     Rigidbody m_Rigidbody;
     Collider m_Collider;
 
-    private void Start()
+    protected virtual void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<Collider>();
     }
 
-    public void Grab(GameObject player) // Player script calls this
+    public virtual void Grab(GameObject player) // Player script calls this
     {
         if (m_bInRange)
         {
-            m_bIsGrabbed = !m_bIsGrabbed;
-            Debug.Log($"Grab: {m_bIsGrabbed}");
-            m_Rigidbody.isKinematic = m_bIsGrabbed;
-            m_Collider.isTrigger = m_bIsGrabbed;
+            IsGrabbed = !IsGrabbed;
+            Debug.Log($"Grab: {IsGrabbed}");
+            m_Rigidbody.isKinematic = IsGrabbed;
+            //m_Collider.isTrigger = IsGrabbed;
 
-            if (m_bIsGrabbed == true)
+            if (IsGrabbed == true)
+            {
                 m_GrabbingPlayer = player;
+            }
         }
     }
 
     private void Update()
     {
-        if (m_bIsGrabbed == true && m_GrabbingPlayer != null)
+        if (IsGrabbed == true && m_GrabbingPlayer != null)
         {
             float size = transform.localScale.magnitude;
             Vector3 pos = m_GrabbingPlayer.transform.forward * size * 0.8f;
             pos.y += size;
             transform.position = m_GrabbingPlayer.transform.position + pos;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.name.Contains("Player"))
-        {
-            if ((other.transform.position - transform.position).sqrMagnitude < m_fRange * m_fRange)
-            {
-                m_bInRange = true;
-            }
         }
     }
 

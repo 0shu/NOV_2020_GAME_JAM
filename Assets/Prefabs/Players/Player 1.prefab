@@ -292,11 +292,11 @@ GameObject:
   - component: {fileID: 2073149580531794869}
   - component: {fileID: 2073149580531794868}
   - component: {fileID: 2744877437446376720}
-  - component: {fileID: 638639256}
   - component: {fileID: 638639255}
+  - component: {fileID: 6170200701510017430}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379,24 +379,12 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f309cdc15a922c345bf505a837702f70, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &638639256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073149580531794867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8672afb6f54863418308230dd454eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &638639255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,8 +398,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: 1
-  movePower: 100
+  movePower: 4
   m_fJumpPower: 1
+--- !u!114 &6170200701510017430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073149580531794867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8672afb6f54863418308230dd454eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3116628407226269223
 GameObject:
   m_ObjectHideFlags: 0

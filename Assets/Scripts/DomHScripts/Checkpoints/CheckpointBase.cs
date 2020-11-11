@@ -8,7 +8,7 @@ public abstract class CheckpointBase : MonoBehaviour
     private int m_iCheckpointNumber;
 
     public int CheckpointNumber { get => m_iCheckpointNumber; }
-    public abstract bool ValidCheckpoint { get; }
+    public abstract bool ValidCheckpoint { get; protected set; }
 
     //prevent 2 players respawning at the same time in the same place
     [SerializeField]
