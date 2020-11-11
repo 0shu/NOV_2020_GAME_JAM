@@ -9,8 +9,8 @@ public class SwitchEventBool : UnityEvent<bool> { }
 
 public class Switch : Interactable
 {
-    private bool m_bSwitchStatus = false;
-    
+    bool m_bSwitchStatus = false;
+
     private SwitchEventVoid m_SwitchEventVoid;
     private SwitchEventBool m_SwitchEventBool;
 
