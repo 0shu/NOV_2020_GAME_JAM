@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ff14a8257fc9be34696508543f961721, type: 2}
+  - {fileID: 2100000, guid: ff9d67004d97a1549a2314b6d26e238f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,4 +126,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   power: 10
   pole: 0
-  rb: {fileID: 0}
+  glowMesh: {fileID: 0}
+  northMat: {fileID: 0}
+  southMat: {fileID: 0}
+  neutralMat: {fileID: 0}
