@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     GameObject m_Player2;
 
     Camera m_Camera;
-    public int m_iMaxDistFromEdge = 50;
+    public int m_iMaxPercentFromEdge = 10;
     const float m_kfMaxScale = 4.5f;
     float m_fStartingOrthoSize;
     float m_fStartingDistance;
@@ -36,17 +36,11 @@ public class CameraController : MonoBehaviour
         Vector3 screenPos2 = m_Camera.WorldToScreenPoint(m_Player2.transform.position); //player 2 screen pos
 
         //if the players are at the boundaries
-        if (    (screenPos1.x < m_iMaxDistFromEdge || Screen.width - screenPos2.x < m_iMaxDistFromEdge)
-            ||  (screenPos2.x < m_iMaxDistFromEdge || Screen.width - screenPos1.x < m_iMaxDistFromEdge)
-            ||  (screenPos1.y < m_iMaxDistFromEdge || Screen.width - screenPos2.y < m_iMaxDistFromEdge)
-            ||  (screenPos2.y < m_iMaxDistFromEdge || Screen.width - screenPos1.y < m_iMaxDistFromEdge))
+        if (TooClose(screenPos1, screenPos2))
         {
             m_fScale += 0.01f;
         }
-        else if (   (screenPos1.x > 2 * m_iMaxDistFromEdge && Screen.width - screenPos2.x > 2 * m_iMaxDistFromEdge)
-            &&      (screenPos2.x > 2 * m_iMaxDistFromEdge && Screen.width - screenPos1.x > 2 * m_iMaxDistFromEdge)
-            &&      (screenPos1.y > 2 * m_iMaxDistFromEdge && Screen.width - screenPos2.y > 2 * m_iMaxDistFromEdge)
-            &&      (screenPos2.y > 2 * m_iMaxDistFromEdge && Screen.width - screenPos1.y > 2 * m_iMaxDistFromEdge))
+        else if (TooFar(screenPos1, screenPos2))
         {
             m_fScale -= 0.01f;
         }
@@ -57,5 +51,27 @@ public class CameraController : MonoBehaviour
 
         if (m_Camera.orthographic)
             m_Camera.orthographicSize = Mathf.Lerp(m_Camera.orthographicSize, m_fStartingOrthoSize * m_fScale, m_fSmoothTime);
+    }
+
+    bool TooClose(Vector3 player1, Vector3 player2)
+    {
+        int distX = Screen.width / (100 / m_iMaxPercentFromEdge);
+        int distY = Screen.height / (100 / m_iMaxPercentFromEdge);
+
+        return (player1.x < distX ||  Screen.width - player2.x < distX)
+            || (player2.x < distX ||  Screen.width - player1.x < distX)
+            || (player1.y < distY || Screen.height - player2.y < distY)
+            || (player2.y < distY || Screen.height - player1.y < distY);
+    }
+
+    bool TooFar(Vector3 player1, Vector3 player2)
+    {
+        int distX = Screen.width / (100 / ((int)(m_iMaxPercentFromEdge * 1.5f)));
+        int distY = Screen.height / (100 / ((int)(m_iMaxPercentFromEdge * 1.5f)));
+
+        return (player1.x > distX &&  Screen.width - player2.x > distX)
+            && (player2.x > distX &&  Screen.width - player1.x > distX)
+            && (player1.y > distY && Screen.height - player2.y > distY)
+            && (player2.y > distY && Screen.height - player1.y > distY);
     }
 }

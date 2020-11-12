@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player1: {fileID: 0}
   m_Player2: {fileID: 0}
-  m_iMaxDistFromEdge: 125
+  m_iMaxPercentFromEdge: 20
 --- !u!114 &382440696143857358
 MonoBehaviour:
   m_ObjectHideFlags: 0

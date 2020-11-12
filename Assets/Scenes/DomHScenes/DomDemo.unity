@@ -4194,6 +4194,11 @@ PrefabInstance:
       propertyPath: m_Player2
       value: 
       objectReference: {fileID: 1916432943}
+    - target: {fileID: 382440696143857347, guid: c2aa50c53feb7c14a82999afcd650513,
+        type: 3}
+      propertyPath: m_iMaxPercentFromEdge
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 382440696143857351, guid: c2aa50c53feb7c14a82999afcd650513,
         type: 3}
       propertyPath: m_Name
