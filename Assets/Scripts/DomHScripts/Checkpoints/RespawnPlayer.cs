@@ -15,9 +15,15 @@ public class RespawnPlayer : RespawnBasic
             if (checkpoint.ValidCheckpoint == true)
             {
                 if (m_LastCheckpoint == null)
+                {
                     m_LastCheckpoint = checkpoint;
+                    AudioManager.PlaySFX(AudioManager.SFXClip.Checkpoint);
+                }
                 else if (checkpoint.CheckpointNumber > m_LastCheckpoint.CheckpointNumber)
+                {
                     m_LastCheckpoint = checkpoint;
+                    AudioManager.PlaySFX(AudioManager.SFXClip.Checkpoint);
+                }
             }
         }
     }

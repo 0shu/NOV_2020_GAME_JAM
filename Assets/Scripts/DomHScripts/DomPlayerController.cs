@@ -102,6 +102,7 @@ public class DomPlayerController : MonoBehaviour
         {
             Magnetic mag = GetComponent<Magnetic>();
             mag.Swap();
+            AudioManager.PlaySFX(AudioManager.SFXClip.Magnet);
         }
 
         /*//Jump

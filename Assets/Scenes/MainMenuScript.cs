@@ -10,6 +10,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void PlayGame()
     {
+        AudioManager.PlayMusic(AudioManager.MusicClip.InGameLoop);
         SceneManager.LoadScene(1);
     }
 

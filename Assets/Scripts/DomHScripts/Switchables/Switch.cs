@@ -26,6 +26,8 @@ public class Switch : Interactable
 
         m_SwitchEventVoid?.Invoke();
         m_SwitchEventBool?.Invoke(m_bSwitchStatus);
+
+        AudioManager.PlaySFX(AudioManager.SFXClip.Buzz);
     }
 
     public void AddBehaviour(UnityAction function) // from a switchable object, pass in a void function you want 

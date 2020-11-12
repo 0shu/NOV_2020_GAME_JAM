@@ -8,8 +8,14 @@ public class MenuScript : MonoBehaviour
     public Dropdown WindowMode;
     bool bFullScreen = true;
 
+    private void Start()
+    {
+        AudioManager.PlayMusic(AudioManager.MusicClip.MenuLoop);
+    }
+
     public void PlayGame()
     {
+        AudioManager.PlayMusic(AudioManager.MusicClip.InGameLoop);
         SceneManager.LoadScene(1);
     }
 

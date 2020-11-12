@@ -34,8 +34,7 @@ public class RespawnBasic : MonoBehaviour
             IEnumerator coroutine = DelayedRespawn();
             StartCoroutine(coroutine);
 
-            //play splash
-            //GetComponent<AudioSource>().PlayOneShot(clip);
+            AudioManager.PlaySFX(AudioManager.SFXClip.Splash);
         }
     }
 
