@@ -2,6 +2,8 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
+    <CscToolPath>C:\Program Files\Unity\Hub\Editor\2019.4.14f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
+    <CscToolExe>unity_csc.bat</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -52,9 +54,6 @@
     <UnityVersion>2019.4.14f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.14f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -66,20 +65,29 @@
     <Compile Include="Assets\Materials\Water\WaterScript.cs" />
     <Compile Include="Assets\Scenes\MainMenuScript.cs" />
     <Compile Include="Assets\Scripts\AudioSourceScript.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\CheckpointBase.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\DoubleCheckpoint.cs" />
-    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\PlayerRespawn.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\FinishCheckpoint.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\GameFinishedScript.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\RespawnPlayer.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Checkpoints\SingleCheckpoint.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\DomPlayerController.cs" />
-    <Compile Include="Assets\Scripts\DomHScripts\Grabbable.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Grabbable\Grabbable.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Grabbable\GrabbableMagnetic.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Interactables\Interactable.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Interactables\InteractableExample.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\RespawnBasic.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\MagnetSwitch.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\MagnetSwitcherObject.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\MoveBySwitch.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\SetActiveBySwitch.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switch.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\Switchable.cs" />
     <Compile Include="Assets\Scripts\DomHScripts\Switchables\SwitchableExample.cs" />
+    <Compile Include="Assets\Scripts\DomHScripts\Switchables\SwitchableSwitch.cs" />
     <Compile Include="Assets\Scripts\MenuScript.cs" />
     <Compile Include="Assets\Scripts\Simons\MagnetManager.cs" />
     <Compile Include="Assets\Scripts\Simons\Magnetic.cs" />
@@ -629,37 +637,37 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.14f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>C:/Users/Xeltania/Documents/GitHub/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Users/smart/OneDrive/Desktop/GameJam/GDS-Jam---Apart/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

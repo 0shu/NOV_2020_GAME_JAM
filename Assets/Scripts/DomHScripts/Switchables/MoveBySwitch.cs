@@ -7,7 +7,7 @@ public class MoveBySwitch : SwitchableVoid
     bool m_bAtStartPos = true;
     Vector3 m_StartPosition;
     public Vector3 m_Translation = new Vector3();
-    public float m_fMoveSpeed = 0f;
+    public float m_fMoveDistPerSecond = 0f;
 
     protected override void Start()
     {
@@ -30,11 +30,11 @@ public class MoveBySwitch : SwitchableVoid
     {
         if (m_bAtStartPos) //should get to start pos
         {
-            transform.position = Vector3.Lerp(transform.position, m_StartPosition, m_fMoveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, m_StartPosition, m_fMoveDistPerSecond * Time.deltaTime);
         }
         else //should get to translated pos
         {
-            transform.position = Vector3.Lerp(transform.position, m_StartPosition + m_Translation, m_fMoveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, m_StartPosition + m_Translation, m_fMoveDistPerSecond * Time.deltaTime);
         }
     }
 }

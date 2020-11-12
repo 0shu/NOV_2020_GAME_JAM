@@ -41,6 +41,18 @@ public class DomPlayerController : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<CapsuleCollider>();
         pengAnim = GetComponent<Animator>();
+
+        FinishCheckpoint.GameFinishedEvent += OnGameFinished;
+    }
+
+    private void OnDestroy()
+    {
+        FinishCheckpoint.GameFinishedEvent -= OnGameFinished;
+    }
+
+    private void OnGameFinished()
+    {
+        GetComponent<Magnetic>()?.SetNeutral();
     }
 
     void FixedUpdate()

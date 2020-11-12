@@ -5,7 +5,7 @@ using UnityEngine;
 public class FinishCheckpoint : DoubleCheckpoint
 {
     public delegate void GameFinished();
-    public event GameFinished GameFinishedEvent;
+    public static GameFinished GameFinishedEvent;
 
 
     public override bool ValidCheckpoint
@@ -13,6 +13,8 @@ public class FinishCheckpoint : DoubleCheckpoint
         get => base.ValidCheckpoint;
         protected set
         {
+            base.ValidCheckpoint = value;
+
             if (value == true)
                 GameFinishedEvent?.Invoke();
         }
